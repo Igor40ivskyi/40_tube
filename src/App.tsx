@@ -19,6 +19,7 @@ export default function App() {
             />
           </div>
         </div>
+        <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]"></div>
       </div>
     </div>
   );
