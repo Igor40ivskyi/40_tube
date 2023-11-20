@@ -1,8 +1,5 @@
-export function TestChildren({children}) {
+export function TestChildren({ children }) {
+  console.log(children);
 
-    console.log(children);
-
-    return <button/>;
-
-
+  return <button />;
 }
