@@ -1,6 +1,6 @@
 import { formatDuration } from "../utils/formatDuration.ts";
 import { formatTimeAgo } from "../utils/formatTimeAgo.ts";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 
 type VideoGridItemProps = {
   id: string;
@@ -41,10 +41,9 @@ export function VideoGridItem({
     if (isVideoPlaying) {
       videoRef.current.currentTime = 0;
       videoRef.current.play();
-    }else {
+    } else {
       videoRef.current.pause();
     }
-
   }, [isVideoPlaying]);
 
   return (
