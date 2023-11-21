@@ -1,4 +1,10 @@
-import {createContext, ReactNode, useState} from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type SidebarProviderProps = {
   children: ReactNode;
@@ -14,41 +20,56 @@ type SidebarContextType = {
 const SidebarContext = createContext<SidebarContextType | null>(null);
 
 export function useSidebarContext() {
+  const value = useContext(SidebarContext);
+  if (value == null) throw Error("Cannot use outsid of SidebarProvider");
 
+  return value;
 }
+
 export function SidebarProvider({ children }: SidebarProviderProps) {
+  const [isLargeOpen, setIsLargeOpen] = useState(true);
+  const [isSmallOpen, setIsSmallOpen] = useState(false);
 
-    const [isLargeOpen, setIsLargeOpen] = useState(true);
-    const [isSmallOpen, setIsSmallOpen] = useState(false);
+  useEffect(() => {
+    const handler = () => {
+      if (!isScreenSmall()) setIsSmallOpen(false);
+    };
 
-    function isScreenSmall() {
-        return window.innerWidth < 1024;
-    }
-    function toggle() {
-        if (isScreenSmall()) {
-            setIsSmallOpen((s) => !s);
-        }else {
-            setIsLargeOpen((l) => !l);
-        }
-    }
-    function close() {
-        if (isScreenSmall()) {
-            setIsSmallOpen(false);
-        }else {
-            setIsLargeOpen(false);
-        }
-    }
+    window.addEventListener("resize", handler);
 
-    return (
-      <SidebarContext.Provider
-        value={{
-          isLargeOpen,
-          isSmallOpen,
-          toggle,
-          close,
-        }}
-      >
-        {children}
-      </SidebarContext.Provider>
-    );
+    return () => {
+      window.removeEventListener("resize", handler);
+    };
+  }, []);
+
+  function isScreenSmall() {
+    return window.innerWidth < 1024;
+  }
+  function toggle() {
+    if (isScreenSmall()) {
+      setIsSmallOpen((s) => !s);
+    } else {
+      setIsLargeOpen((l) => !l);
+    }
+  }
+  function close() {
+    if (isScreenSmall()) {
+      setIsSmallOpen(false);
+    } else {
+      setIsLargeOpen(false);
+    }
+  }
+
+  return (
+    <SidebarContext.Provider
+      value={{
+        isLargeOpen,
+        isSmallOpen,
+        toggle,
+        close,
+      }}
+    >
+      {children}
+    </SidebarContext.Provider>
+  );
 }
