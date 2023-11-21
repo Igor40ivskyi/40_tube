@@ -89,8 +89,8 @@ export function PageHeaderFirstSection({
       <Button onClick={toggle} variant="ghost" size="icon">
         <Menu />
       </Button>
-      <a href="/">
-        <img src={Logo} alt="logo" className="h-6" />
+      <a href="/" className="text-2xl font-mono font-bold">
+        Educational
       </a>
     </div>
   );
