@@ -123,11 +123,11 @@ export function Sidebar() {
                   title="Fashion & Beauty"
                   url="/fashion-beauty"
               />
-              {/*<LargeSidebarItem*/}
-              {/*    IconOrImgUrl={Podcast}*/}
-              {/*    title="Podcasts"*/}
-              {/*    url="/podcasts"*/}
-              {/*/>*/}
+              <LargeSidebarItem
+                  IconOrImgUrl={Podcast}
+                  title="Podcasts"
+                  url="/podcasts"
+              />
           </LargeSidebarSection>
         </aside>
       </>
