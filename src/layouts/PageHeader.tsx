@@ -1,4 +1,3 @@
-import Logo from "../assets/Brit.png";
 import { ArrowLeft, Bell, Menu, Mic, Search, Upload, User } from "lucide-react";
 import { Button } from "../components/Button.tsx";
 import { useState } from "react";
